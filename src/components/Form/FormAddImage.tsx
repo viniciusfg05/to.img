@@ -29,6 +29,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   };
 
   const queryClient = useQueryClient();
+
   const mutation = useMutation(
     // TODO MUTATION API POST REQUEST,
     {
@@ -36,17 +37,13 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     }
   );
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState,
-    setError,
-    trigger,
-  } = useForm();
+  const { register, handleSubmit, reset, formState, setError, trigger } =
+    useForm();
+
   const { errors } = formState;
 
   const onSubmit = async (data: Record<string, unknown>): Promise<void> => {
+    console.log(data);
     try {
       // TODO SHOW ERROR TOAST IF IMAGE URL DOES NOT EXISTS
       // TODO EXECUTE ASYNC MUTATION
@@ -67,20 +64,25 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           setLocalImageUrl={setLocalImageUrl}
           setError={setError}
           trigger={trigger}
+          {...register('image', {
+            required: true,
+            validate: {
+              lessThan10MB: (value: any) => ? console.log(value) : null
+            },
+          })}
           // TODO SEND IMAGE ERRORS
-          // TODO REGISTER IMAGE INPUT WITH VALIDATIONS
         />
 
         <TextInput
           placeholder="Título da imagem..."
+          {...register('title')}
           // TODO SEND TITLE ERRORS
-          // TODO REGISTER TITLE INPUT WITH VALIDATIONS
         />
 
         <TextInput
           placeholder="Descrição da imagem..."
+          {...register('description')}
           // TODO SEND DESCRIPTION ERRORS
-          // TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
         />
       </Stack>
 
@@ -97,3 +99,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     </Box>
   );
 }
+
+// FAUNA_API_KEY=fnAE8EEcmoAAVgdpxoeTPXHDU5ql5Q1NIqPlnSZJ
+
+// NEXT_PUBLIC_IMGBB_API_KEY=3609c6154bd7522151e6c19f9d919a6e
