@@ -25,28 +25,20 @@ export function ModalViewImage({
 }: ModalViewImageProps): JSX.Element {
   return (
     <>
-      <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="900px"
+      >
         <ModalOverlay w="100vw" h="100vh" bg="rgba(0, 0, 0, 0.6) " />
-        <ModalContent
-          display="flex"
-          justifyContent="center"
-          position="relative"
-          alignItems="center"
-          margin="auto 0"
-          ww={900}
-          wh={600}
-        >
+        <ModalContent bg="transparent">
           <ModalBody
-            position="relative"
-            alignItems="center"
-            display="flex"
-            w={900}
-            h={600}
-            p="0"
-            bg="transparent"
+            sx={{ border: 'none', padding: 0, backgroundColor: 'transparent' }}
+            mw="900px"
           >
-            <Box bg="transparent">
-              <Image src={imgUrl} />
+            <Box w="900px" m="auto auto">
+              <Image src={imgUrl} w="100%" position="relative" p="0" />
               <Box
                 bg="#353431"
                 borderRadius={'0px 0px 6px 6px'}
@@ -55,7 +47,9 @@ export function ModalViewImage({
                 alignItems="center"
                 p={'0.5rem'}
               >
-                <Link href="#">Abrir original</Link>
+                <Link href={imgUrl} fontSize="1rem" mr="auto" isExternal>
+                  Abrir original
+                </Link>
               </Box>
             </Box>
           </ModalBody>

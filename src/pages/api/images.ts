@@ -27,7 +27,7 @@ export default async function handler(
 ): Promise<void> {
   if (req.method === 'POST') {
     const { url, title, description } = req.body;
-
+    console.log(title, url);
     return client
       .query(
         query.Create(query.Collection('images'), {
